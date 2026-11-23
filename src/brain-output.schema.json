@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Claudio brain output",
+  "description": "What Claude returns on every trigger. claude.js passes this file to `claude -p --json-schema`.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["say", "play", "reason", "segue"],
+  "properties": {
+    "say": {
+      "type": "string",
+      "description": "What the DJ speaks right now. Sent to TTS. Keep it under ~60 seconds of speech. Empty string = stay quiet."
+    },
+    "play": {
+      "type": "array",
+      "description": "Songs to queue, in order. Up to 10. Empty array = keep the current queue.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "artist"],
+        "properties": {
+          "title": { "type": "string" },
+          "artist": { "type": "string" },
+          "id": {
+            "type": "string",
+            "description": "NetEase song id. Only fill it if it came from a search result. Otherwise leave it out and router.js resolves it with ncm search."
+          },
+          "why": {
+            "type": "string",
+            "description": "One short line on why this song. Shown in the Player view."
+          }
+        }
+      }
+    },
+    "reason": {
+      "type": "string",
+      "description": "Why this choice overall. Saved to state.db. Never spoken."
+    },
+    "segue": {
+      "type": "string",
+      "description": "Short line to speak between songs or when the queue ends. Empty string = none."
+    }
+  }
+}

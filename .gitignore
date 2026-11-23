@@ -1,0 +1,7 @@
+node_modules/
+.env
+user/
+state.db
+state.db-*
+cache/
+.DS_Store

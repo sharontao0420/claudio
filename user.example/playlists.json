@@ -1,0 +1,17 @@
+{
+  "_note": "Example. Export your own playlists here. Only title + artist are required.",
+  "playlists": [
+    {
+      "name": "Morning",
+      "songs": [
+        { "title": "Song title", "artist": "Artist name" }
+      ]
+    },
+    {
+      "name": "Focus",
+      "songs": [
+        { "title": "Song title", "artist": "Artist name" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+// Fake `claude` for tests. Prints what `claude -p --output-format json` prints.
+// FAKE_CLAUDE_MODE: ok (default) | error | garbage | hang
+
+const args = process.argv.slice(2);
+const mode = process.env.FAKE_CLAUDE_MODE ?? 'ok';
+let input = '';
+
+process.stdin.on('data', (d) => (input += d));
+process.stdin.on('end', () => {
+  if (mode === 'hang') return setInterval(() => {}, 1000);
+  if (mode === 'garbage') return process.stdout.write('not json');
+  if (mode === 'error') {
+    process.stdout.write(JSON.stringify({ type: 'result', is_error: true, result: 'auth failed' }));
+    process.exit(1);
+  }
+  process.stdout.write(JSON.stringify({
+    type: 'result',
+    is_error: false,
+    result: '',
+    structured_output: {
+      say: `heard: ${input}`,
+      play: [{ title: '晴天', artist: '周杰伦', why: 'sunny out' }],
+      reason: JSON.stringify(args),
+      segue: '',
+    },
+  }));
+});

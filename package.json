@@ -1,0 +1,15 @@
+{
+  "name": "claudio",
+  "version": "0.1.0",
+  "description": "A personal AI radio DJ. Claude Code is the brain.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "test": "node --test",
+    "db:init": "node scripts/init-db.js"
+  }
+}
